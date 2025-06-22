@@ -2,7 +2,7 @@ CREATE DATABASE Universidad;
 USE Universidad
 
 
--- 1. CREACI�N DE TABLAS
+-- 1. CREACI0N DE TABLAS
 
 
 CREATE TABLE Estudiante (
@@ -63,23 +63,23 @@ CREATE TABLE Examen (
 );
 
 
--- 2. INSERCI�N DE DATOS (INSERT)
+-- 2. INSERCION DE DATOS (INSERT)
 
 
 INSERT INTO Estudiante (id_estudiante, nombre) VALUES
-(1, 'Laura Mart�nez'),
-(2, 'Carlos G�mez'),
+(1, 'Laura Martinez'),
+(2, 'Carlos Gomez'),
 (3, 'Ana Torres');
 
 INSERT INTO Profesor (id_profesores, nombre, especialidad) VALUES
-(1, 'Marta Ruiz', 'Matem�ticas'),
-(2, 'Luis P�rez', 'Historia'),
-(3, 'Julia S�nchez', 'F�sica');
+(1, 'Marta Ruiz', 'Matematicas'),
+(2, 'Luis Perez', 'Historia'),
+(3, 'Julia Sanchez', 'Fisica');
 
 INSERT INTO Curso (id_curso, titulo, descripcion) VALUES
-(1, '�lgebra I', 'Curso b�sico de �lgebra para principiantes'),
-(2, 'Historia Moderna', 'Estudio de los eventos hist�ricos desde el siglo XVIII'),
-(3, 'F�sica General', 'Introducci�n a conceptos fundamentales de la f�sica');
+(1, 'algebra I', 'Curso basico de algebra'),
+(2, 'Historia Moderna', 'Estudio de los eventos del siglo XVIII'),
+(3, 'Fisica General', 'conceptos fundamentales de la fisica');
 
 INSERT INTO Curso_Estudiante (id_curso, id_estudiante) VALUES
 (1, 1), (2, 1), (2, 2), (3, 2), (3, 3);
@@ -88,31 +88,31 @@ INSERT INTO Curso_Profesor (id_curso, id_profesor) VALUES
 (1, 1), (2, 2), (3, 3);
 
 INSERT INTO Leccion (id_leccion, titulo, contenido, id_curso) VALUES
-(1, 'Introducci�n al �lgebra', 'Contenido sobre variables y ecuaciones', 1),
-(2, 'La Revoluci�n Francesa', 'Contenido sobre eventos de 1789', 2),
-(3, 'Leyes del Movimiento', 'Contenido sobre Newton y din�mica', 3);
+(1, 'Introduccion al algebra', 'Contenido sobre variables y ecuaciones', 1),
+(2, 'La Revolucion Francesa', 'Contenido sobre eventos de 1789', 2),
+(3, 'Leyes del Movimiento', 'Contenido sobre Newton y dinamica', 3);
 
 INSERT INTO Archivo (id_archivo, nombre, url, id_leccion) VALUES
-(1, 'ejercicios_algebra.pdf', 'http://servidor.com/algebra.pdf', 1),
-(2, 'revolucion_francesa.mp4', 'http://servidor.com/rev_francesa.mp4', 2),
-(3, 'leyes_movimiento.docx', 'http://servidor.com/leyes_newton.docx', 3);
+(1, 'ejercicios_algebra.pdf', 'www.quierodormir.com', 1),
+(2, 'revolucion_francesa.mp4', 'www.ayuda.com', 2),
+(3, 'leyes_movimiento.docx', 'www.NOSE.com', 3);
 
 INSERT INTO Examen (id_examen, titulo, fecha, id_curso) VALUES
-(1, 'Examen �lgebra Unidad 1', '2025-07-10', 1),
+(1, 'Examen algebra Unidad 1', '2025-07-10', 1),
 (2, 'Examen Historia Moderna', '2025-07-15', 2),
-(3, 'Examen F�sica Cl�sica', '2025-07-20', 3);
+(3, 'Examen Fisica Clasica', '2025-07-20', 3);
 
 
 -- 3. UPDATE
 
 
-UPDATE Estudiante SET nombre = 'Laura M. Mart�nez' WHERE id_estudiante = 1;
+UPDATE Estudiante SET nombre = 'Laura M. Martinez' WHERE id_estudiante = 1;
 
-UPDATE Profesor SET especialidad = 'Matem�tica Aplicada' WHERE id_profesores = 1;
+UPDATE Profesor SET especialidad = 'Matematica Aplicada' WHERE id_profesores = 1;
 
-UPDATE Curso SET titulo = '�lgebra B�sica' WHERE id_curso = 1;
+UPDATE Curso SET titulo = 'algebra Basica' WHERE id_curso = 1;
 
-UPDATE Leccion SET contenido = 'Contenido actualizado sobre ecuaciones b�sicas' WHERE id_leccion = 1;
+UPDATE Leccion SET contenido = 'Contenido actualizado sobre ecuaciones basicas' WHERE id_leccion = 1;
 
 UPDATE Archivo SET nombre = 'algebra_ejercicios.pdf' WHERE id_archivo = 1;
 
@@ -138,21 +138,15 @@ ALTER TABLE Examen ADD puntaje_maximo INT;
 
 
 -- 6. DROP COLUMN / TABLE
-
-
+ALTER TABLE Estudiante DROP COLUMN correo;
+ALTER TABLE Profesor DROP COLUMN telefono;
 ALTER TABLE Curso DROP COLUMN duracion;
 ALTER TABLE Leccion DROP COLUMN fecha_publicacion;
 ALTER TABLE Examen DROP COLUMN puntaje_maximo;
 
 
--- 7. TRUNCATE
 
-
-TRUNCATE TABLE Archivo;
-TRUNCATE TABLE Examen;
-TRUNCATE TABLE Leccion;
-
--- 8. FUNCIONES DE CADENA
+-- 7. FUNCIONES DE CADENA
 
 
 SELECT nombre, LEN(nombre) AS longitud FROM Estudiante;
@@ -163,11 +157,11 @@ SELECT SUBSTRING(titulo, 1, 5) AS abreviatura FROM Curso;
 SELECT REPLACE(nombre, 'Laura', 'L.') AS nombre_modificado FROM Estudiante;
 SELECT LEFT(titulo, 7) AS inicio_titulo FROM Leccion;
 SELECT RIGHT(nombre, 4) AS final_nombre FROM Estudiante;
-SELECT LTRIM(RTRIM('   F�sica   ')) AS sin_espacios;
-SELECT CHARINDEX('ci�n', descripcion) AS posicion_subcadena FROM Curso;
+SELECT LTRIM(RTRIM('   Fisica   ')) AS sin_espacios;
+SELECT CHARINDEX('cien', descripcion) AS posicion_subcadena FROM Curso;
 
 
--- 9. SELECTS ANIDADOS
+-- 8. SELECTS ANIDADOS
 
 
 SELECT nombre FROM Estudiante WHERE id_estudiante = 
@@ -185,7 +179,7 @@ SELECT titulo FROM Curso WHERE id_curso =
 SELECT nombre FROM Estudiante WHERE id_estudiante IN 
 (SELECT id_estudiante FROM Curso_Estudiante WHERE id_curso = 2);
 
--- 10. JOINS
+-- 9. JOINS
 
 
 SELECT E.nombre, C.titulo
@@ -210,9 +204,9 @@ SELECT E.titulo AS examen, C.titulo AS curso
 FROM Examen E
 JOIN Curso C ON E.id_curso = C.id_curso;
 
--- ===============================
--- 11. PROCEDIMIENTOS ALMACENADOS
--- ===============================
+
+-- 10. PROCEDIMIENTOS ALMACENADOS
+
 
 -- 1. Mostrar estudiantes
 CREATE PROCEDURE VerEstudiantes
@@ -255,3 +249,10 @@ AS
 BEGIN
     DELETE FROM Archivo WHERE id_archivo = @archivoID;
 END;
+
+-- 11. TRUNCATE
+TRUNCATE TABLE Profesor;
+TRUNCATE TABLE Estudiante;
+TRUNCATE TABLE Archivo;
+TRUNCATE TABLE Examen;
+TRUNCATE TABLE Leccion;
