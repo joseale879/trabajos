@@ -49,7 +49,6 @@ CREATE TABLE Leccion (
 CREATE TABLE Archivo (
     id_archivo INT PRIMARY KEY,
     nombre VARCHAR(100),
-    url TEXT,
     id_leccion INT,
     FOREIGN KEY (id_leccion) REFERENCES Leccion(id_leccion)
 );
@@ -92,10 +91,10 @@ INSERT INTO Leccion (id_leccion, titulo, contenido, id_curso) VALUES
 (2, 'La Revolucion Francesa', 'Contenido sobre eventos de 1789', 2),
 (3, 'Leyes del Movimiento', 'Contenido sobre Newton y dinamica', 3);
 
-INSERT INTO Archivo (id_archivo, nombre, url, id_leccion) VALUES
-(1, 'ejercicios_algebra.pdf', 'www.quierodormir.com', 1),
-(2, 'revolucion_francesa.mp4', 'www.ayuda.com', 2),
-(3, 'leyes_movimiento.docx', 'www.NOSE.com', 3);
+INSERT INTO Archivo (id_archivo, nombre, id_leccion) VALUES
+(1, 'ejercicios_algebra.pdf', 1),
+(2, 'revolucion_francesa.mp4', 2),
+(3, 'leyes_movimiento.docx', 3);
 
 INSERT INTO Examen (id_examen, titulo, fecha, id_curso) VALUES
 (1, 'Examen algebra Unidad 1', '2025-07-10', 1),
